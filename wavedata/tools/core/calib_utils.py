@@ -88,7 +88,11 @@ def read_calibration(calib_dir, img_idx):
     for i in range(4):
         p = data[i]
         p = p[1:]
-        p = [float(p[i]) for i in range(len(p))]
+        new = []
+        for i in range(len(p)):
+            if p[i] != '':
+                new.append(float(p[i]))
+        p = new
         p = np.reshape(p, (3, 4))
         p_all.append(p)
 
@@ -100,13 +104,21 @@ def read_calibration(calib_dir, img_idx):
     # Read in rectification matrix
     tr_rect = data[4]
     tr_rect = tr_rect[1:]
-    tr_rect = [float(tr_rect[i]) for i in range(len(tr_rect))]
+    new = []
+    for i in range(len(tr_rect)):
+        if tr_rect[i] != '':
+            new.append(float(tr_rect[i]))
+    tr_rect = new
     frame_calibration_info.r0_rect = np.reshape(tr_rect, (3, 3))
 
     # Read in velodyne to cam matrix
     tr_v2c = data[5]
     tr_v2c = tr_v2c[1:]
-    tr_v2c = [float(tr_v2c[i]) for i in range(len(tr_v2c))]
+    new = []
+    for i in range(len(tr_v2c)):
+        if tr_v2c[i] != '':
+            new.append(float(tr_v2c[i]))
+    tr_v2c = new
     frame_calibration_info.tr_velodyne_to_cam = np.reshape(tr_v2c, (3, 4))
 
     return frame_calibration_info

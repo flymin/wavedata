@@ -276,7 +276,7 @@ def get_road_plane(img_idx, planes_dir):
 
     :return plane : List containing plane equation coefficients
     """
-
+    '''
     plane_file = planes_dir + '/%06d.txt' % img_idx
 
     with open(plane_file, 'r') as input_file:
@@ -299,8 +299,8 @@ def get_road_plane(img_idx, planes_dir):
     # Normalize the plane coefficients
     norm = np.linalg.norm(plane[0:3])
     plane = plane / norm
-
-    return plane
+    '''
+    return np.asarray([0, -1, 0, 0.2])
 
 
 def compute_box_corners_3d(object_label):
